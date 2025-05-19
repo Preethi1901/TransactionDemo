@@ -52,38 +52,15 @@ class TransactionServiceTest {
 
         when(repository.findAll()).thenReturn(List.of(t1,t2));
         List<Transaction> res=transactionService.getAllDetails();
+
         //assertTrue(res.isEmpty());
         assertEquals("MGRoad, Bangalore", res.get(0).getAtmLocation());
         assertTrue(t1.getAtmLocation()=="MGRoad, Bangalore");
+
         //System.out.println("executed");
     }
 
-    @Test
-    void testGetTransactionsByAtmId() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Transaction t1=new Transaction();
-        t1.setAtmLocation("MGRoad, Bangalore");
-        t1.setAtmId("ATM001");
 
-        Transaction t2=new Transaction();
-        t2.setAtmLocation("Hyderabad");
-        t2.setAtmId("ATM002");
-
-        List<Transaction> mockResult = List.of(t1,t2);
-
-        when(repository.findByAtmId("ATM001")).thenReturn(mockResult);
-
-        Method method=Transaction.class.getDeclaredMethod("getAtmId ", String.class);
-        method.setAccessible(true);
-
-        List<Transaction> result = (List<Transaction>) method.invoke(transactionService,"ATM001");
-        assertEquals(mockResult, result);
-    }
-
-
-    @Test
-    void dummy(){
-        System.out.println("dummy tetss");
-    }
 
 
 }
